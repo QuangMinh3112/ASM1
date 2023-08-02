@@ -20,11 +20,13 @@ return new class extends Migration
             $table->string('image');
             $table->text('description');
             $table->integer('quantity');
+            $table->integer('status');
             $table->integer('category_id');
-
+            $table->integer('brand_id');
             // khai báo khóa ngoại
             // $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -28,21 +28,41 @@
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Viết mô tả" name="description" id="floatingTextarea2" style="height: 100px"></textarea>
                             <label for="floatingTextarea2">Viết mô tả</label>
-                          </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Số lượng</label>
                         <input type="number" name="quantity" class="form-control">
                     </div>
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="category_id">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                            name="category_id">
                             @foreach ($category as $values)
-                            <option value="{{$values->id}}">{{$values->name}}</option>
+                                <option value="{{ $values->id }}">{{ $values->name }}</option>
                             @endforeach
                         </select>
                         <label for="floatingSelect">Chọn danh mục</label>
-                      </div>
-                      <br>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                            name="brand_id">
+                            @foreach ($brand as $values)
+                                <option value="{{ $values->id }}">{{ $values->name }}</option>
+                            @endforeach
+                        </select>
+                        <label for="floatingSelect">Chọn Brand</label>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                            name="status">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Tắt</option>
+                        </select>
+                        <label for="floatingSelect">Chọn Brand</label>
+                    </div>
+                    <br>
                     <button type="submit" class="btn btn-success container">Thêm mới</button>
                 </form>
             </div>

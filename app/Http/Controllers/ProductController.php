@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,11 +14,11 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-
         return view('adminn.products.list', compact('products'));
     }
     public function add(Request $request)
     {
+        $brand = Brand::all();
         $category = Category::all();
         $products = Product::all();
         if ($request->isMethod('POST')) {
@@ -34,14 +35,18 @@ class ProductController extends Controller
             $product->description =  $request->description;
             $product->quantity =  $request->quantity;
             $product->category_id =  $request->category_id;
+            $product->brand_id = $request->brand_id;
+            $product->status = $request->status;
+            // dd($product);
+            $product->save();
             Alert::success('Thêm sản phẩm thành công !');
             return redirect()->route('list_product');
-            $product->save();
         }
-        return view('adminn.products.add', compact('products', 'category'));
+        return view('adminn.products.add', compact('products', 'category', 'brand'));
     }
     public function edit(Request $request, $id)
     {
+        $brand = Brand::all();
         $detail = Product::find($id);
         $category = Category::all();
         if ($request->isMethod('POST')) {
@@ -56,12 +61,15 @@ class ProductController extends Controller
             $detail->description = $request->description;
             $detail->quantity = $request->quantity;
             $detail->category_id = $request->category_id;
+            $detail->brand_id = $request->brand_id;
+            $detail->status = $request->status;
+
             $detail->save();
             Alert::success('Cập nhật thành công !');
             return redirect()->route('list_product');
 
         }
-        return view('adminn.products.edit', compact('detail', 'category'));
+        return view('adminn.products.edit', compact('detail', 'category', 'brand'));
     }
     public function delete($id)
     {

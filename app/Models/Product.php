@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Brand;
 use Ramsey\Uuid\Type\Integer;
 
 class Product extends Model
@@ -13,8 +14,14 @@ class Product extends Model
     public function getCategoryProductName():string{
         return Category::find($this->category_id)->name;
     }
-    public function getCategoryProductID():int{
-        return Category::find($this->category_id)->id;
+    public function getBrandProductName(){
+        $brand = Brand::find($this->brand_id);
+        if($brand) {
+            return $brand->name;
+        }
+        else {
+            return 'Rỗng';
+        }
     }
     protected $table = 'products';
     protected $fillable = [
@@ -23,6 +30,8 @@ class Product extends Model
         'image',
         'description',
         'quantity',
-        'category_id'
+        'category_id',
+        'brand_id',
+        'status'
     ];
 }

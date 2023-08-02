@@ -21,25 +21,27 @@ class CategoryRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules():array
+    public function rules()
     {
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
-        switch($this->method())
-        {
-            case 'POST':
-                switch($currentAction)
-                {
-                    case 'add_category':
+        switch ($this->method()) {
+            case 'post':
+                switch ($currentAction) {
+                    case 'add':
                         $rules = [
-                            'name' => 'required|unique:categories,name|max:255'
+                            'name' => 'required|unique:categories,name|max:50',
                         ];
                         break;
-                    default :
+                    default:
                         break;
                 }
+            default:
                 break;
         }
         return $rules;
+        // return [
+        //     'name' => 'required|unique:categories,name|max:50'
+        // ];
     }
 }

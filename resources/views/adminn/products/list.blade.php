@@ -19,7 +19,9 @@
                                 <th>Ảnh</th>
                                 <th>Mô tả</th>
                                 <th>Danh mục</th>
+                                <th>Brand</th>
                                 <th>Số lượng</th>
+                                <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -29,13 +31,30 @@
                                     <th>{{ $values->id }}</th>
                                     <th>{{ $values->name }}</th>
                                     <th>{{ $values->price }}</th>
-                                    <th><img width="200" src="{{ asset($values->image) }}" alt=""></th>
+                                    <th><img width="200" src="
+                                            {{asset($values->image ? $values->image : '/upload/tesst.png')}}
+                                        ">
+                                    </th>
                                     <th>{{ $values->description }}</th>
-                                    <th>{{ $values->getCategoryProductName() }}</th>
+                                    <th>
+                                        {{ $values->getCategoryProductName() }}
+                                    </th>
+                                    <th>
+                                        {{ $values->getBrandProductName() }}
+                                    </th>
                                     <th>{{ $values->quantity }}</th>
                                     <th>
-                                        <a href="{{ route('edit_product', ['id'=>$values->id]) }}" class="btn btn-warning">Sửa</a>
-                                        <a href="{{ route('delete_product', ['id'=>$values->id]) }}" class="btn btn-danger" onclick="confirmation(event)">Xóa</a>
+                                        @if ($values->status == 1)
+                                            <p class="text-success">{{ 'Hoạt động' }}</p>
+                                        @else
+                                            <p class="text-danger">{{ 'Đã tắt' }}</p>
+                                        @endif
+                                    </th>
+                                    <th>
+                                        <a href="{{ route('edit_product', ['id' => $values->id]) }}"
+                                            class="btn btn-warning">Sửa</a>
+                                        <a href="{{ route('delete_product', ['id' => $values->id]) }}"
+                                            class="btn btn-danger" onclick="confirmation(event)">Xóa</a>
 
                                     </th>
                                 </tr>
@@ -49,7 +68,9 @@
                             <th>Ảnh</th>
                             <th>Mô tả</th>
                             <th>Danh mục</th>
+                            <th>Brand</th>
                             <th>Số lượng</th>
+                            <th>Trạng thái</th>
                             <th>Chức năng</th>
                         </tfoot>
                     </table>
